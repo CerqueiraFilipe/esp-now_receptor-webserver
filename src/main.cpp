@@ -5,6 +5,9 @@
 #include <ESPAsyncWebServer.h>
 #include <ArduinoJson.h>
 
+//Estrutura de dados que será recebido
+//x, y e z = ângulos captados pelo MPU6050
+//c = identificação da esp32 que está enviando os dados
 typedef struct myData {
   float x; float y; float z; int c;
 } myData;
@@ -12,9 +15,12 @@ typedef struct myData {
 myData placas[3]; 
 AsyncWebServer server(80); 
 
+//Nome e senha da rede criada pela esp32 que vai receber os dados
 const char* ssid = "ESP32_MPU_Hub"; 
 const char* password = "12345678"; 
 
+
+//Página web criada pela esp32
 const char index_html[] PROGMEM = R"rawliteral(
 <!DOCTYPE HTML><html>
 <head>
